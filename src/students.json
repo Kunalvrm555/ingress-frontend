@@ -1,0 +1,254 @@
+[
+  {
+    "type": "RS",
+    "rollno": "20CE91R01",
+    "department": "CE",
+    "name": "Akash Tripathi",
+    "checkInTime": "11:54 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CD91R01",
+    "department": "CD",
+    "name": "Arun Chakrabortty",
+    "checkInTime": "11:37 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10006",
+    "department": "ME",
+    "name": "Ambhore Tejas Avdhut",
+    "checkInTime": "10:35 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R02",
+    "department": "CE",
+    "name": "Anjaly P Thomas",
+    "checkInTime": "10:32 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10013",
+    "department": "ME",
+    "name": "Jatoth Rameshwar Naik",
+    "checkInTime": "10:15 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT92R03",
+    "department": "BT",
+    "name": "Sonar Shubham Balbhim",
+    "checkInTime": "10:00 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R04",
+    "department": "BT",
+    "name": "V Amrit",
+    "checkInTime": "09:45 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT92F03",
+    "department": "BT",
+    "name": "Krishan Gourav Behera",
+    "checkInTime": "09:33 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R04",
+    "department": "CE",
+    "name": "Ashesh Rudra Paul",
+    "checkInTime": "09:17 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R03",
+    "department": "BT",
+    "name": "Satyajit Beura",
+    "checkInTime": "09:05 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R03",
+    "department": "CE",
+    "name": "Arjun P V",
+    "checkInTime": "09:00 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10009",
+    "department": "ME",
+    "name": "Awanish Kumar",
+    "checkInTime": "08:52 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BS91R03",
+    "department": "BS",
+    "name": "Puja Kumari",
+    "checkInTime": "08:45 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91Q01",
+    "department": "CE",
+    "name": "Supradeep Singh",
+    "checkInTime": "08:40 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10014",
+    "department": "ME",
+    "name": "Kalal Vinay",
+    "checkInTime": "08:27 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CD92R01",
+    "department": "CD",
+    "name": "Dibya Kanti Haldar",
+    "checkInTime": "08:15 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10016",
+    "department": "ME",
+    "name": "Krisha Vinay Sanghvi",
+    "checkInTime": "08:03 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10007",
+    "department": "ME",
+    "name": "Ankit Raj",
+    "checkInTime": "08:00 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R05",
+    "department": "BT",
+    "name": "Yadav Santoshnambi",
+    "checkInTime": "11:59 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R07",
+    "department": "CE",
+    "name": "Malothu Aishwarya",
+    "checkInTime": "11:45 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT92F02",
+    "department": "BT",
+    "name": "Atreyee Mukherjee",
+    "checkInTime": "11:33 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91F02",
+    "department": "BT",
+    "name": "Sucheta Ghosh",
+    "checkInTime": "11:20 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10008",
+    "department": "ME",
+    "name": "Arnab Mondal",
+    "checkInTime": "11:10 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BS91R05",
+    "department": "BS",
+    "name": "Aratrika De",
+    "checkInTime": "10:57 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CD92R03",
+    "department": "CD",
+    "name": "Sourav Garai",
+    "checkInTime": "10:45 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R04",
+    "department": "BT",
+    "name": "V Amrit",
+    "checkInTime": "10:30 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91F01",
+    "department": "BT",
+    "name": "Moumita Ghosh",
+    "checkInTime": "10:17 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R05",
+    "department": "CE",
+    "name": "Kuldeep Khichar",
+    "checkInTime": "10:03 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10010",
+    "department": "ME",
+    "name": "Faizan Ahmed",
+    "checkInTime": "09:49 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R03",
+    "department": "BT",
+    "name": "Satyajit Beura",
+    "checkInTime": "09:35 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R03",
+    "department": "CE",
+    "name": "Arjun P V",
+    "checkInTime": "09:20 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10009",
+    "department": "ME",
+    "name": "Awanish Kumar",
+    "checkInTime": "09:05 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20BT91R05",
+    "department": "BT",
+    "name": "Yadav Santoshnambi",
+    "checkInTime": "08:50 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R01",
+    "department": "CE",
+    "name": "Rajesh Kumar Mahato",
+    "checkInTime": "08:35 AM"
+  },
+  {
+    "type": "UG",
+    "rollno": "20MF10014",
+    "department": "ME",
+    "name": "Kalal Vinay",
+    "checkInTime": "08:20 AM"
+  },
+  {
+    "type": "RS",
+    "rollno": "20CE91R02",
+    "department": "CE",
+    "name": "Anjaly P Thomas",
+    "checkInTime": "08:10 AM"
+  }
+]
