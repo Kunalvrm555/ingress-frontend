@@ -7,6 +7,7 @@ const Status = () => {
         rollNo: '',
         name: '',
         checkInTime: '',
+        checkoutTime: '',
     });
     const [loading, setLoading] = useState(false);
     const [realTimeInput, setRealTimeInput] = useState('');
@@ -37,6 +38,7 @@ const Status = () => {
                     rollNo: data.rollNo,
                     name: data.name,
                     checkInTime: data.checkInTime,
+                    checkoutTime: data.checkoutTime,
                 });
             }
 
@@ -55,13 +57,13 @@ const Status = () => {
     }, [handleKeyPress]);
 
     return (
-        <Box sx={{ maxWidth: '40%', margin: 'auto', marginTop: 2, marginBottom: 2}}>
+        <Box sx={{ maxWidth: '40%', margin: 'auto', marginTop: 2, marginBottom: 2 }}>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table" className={loading ? 'blur-effect' : ''}>
                     <TableBody>
                         <TableRow>
                             <TableCell>
-                            <Typography variant="h6">Please scan your ID card</Typography>
+                                <Typography variant="h6">Please scan your ID card</Typography>
                             </TableCell>
                             <TableCell>{realTimeInput}</TableCell>
                         </TableRow>
@@ -76,6 +78,10 @@ const Status = () => {
                         <TableRow>
                             <TableCell>Check In Time</TableCell>
                             <TableCell>{student.checkInTime}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Check Out Time</TableCell>
+                            <TableCell>{student.checkoutTime}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
