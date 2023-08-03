@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, Box } from '@mui/material';
 import { TableVirtuoso } from 'react-virtuoso';
-import studentsData from './students.json'; // Import students data from local JSON file
+// import studentsData from './students.json'; // Import students data from local JSON file
 
 const columns = [
   {
@@ -36,8 +36,18 @@ const columns = [
   },
 ];
 
-const StudentTable = () => {
-  const [students, setStudents] = useState(studentsData); // use local data for development
+const StudentTable = ({ lastUpdate }) => {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          const res = await fetch('http://localhost:8000/logs');
+          const data = await res.json();
+          setStudents(data);
+      };
+
+      fetchData();
+  }, [lastUpdate]);
 
   const VirtuosoTableComponents = {
     Scroller: React.forwardRef((props, ref) => (
