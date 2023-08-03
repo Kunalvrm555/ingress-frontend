@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
 import {
   Table,
   TableBody,
@@ -72,7 +73,7 @@ const Status = ({ setLastUpdate }) => {
 
   return (
     <Box
-      sx={{ maxWidth: "45%", margin: "auto", marginTop: 2, marginBottom: 2 }}
+      sx={{ maxWidth: "90%", margin: "auto", marginTop: 2, marginBottom: 2 }}
     >
       <TableContainer component={Paper}>
         <Table
@@ -108,6 +109,10 @@ const Status = ({ setLastUpdate }) => {
       </TableContainer>
     </Box>
   );
+};
+
+Status.propTypes = {
+  setLastUpdate: PropTypes.func.isRequired,
 };
 
 export default Status;

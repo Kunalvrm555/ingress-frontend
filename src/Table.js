@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, Box } from '@mui/material';
 import { TableVirtuoso } from 'react-virtuoso';
 // import studentsData from './students.json'; // Import students data from local JSON file
@@ -63,23 +64,22 @@ const StudentTable = ({ lastUpdate }) => {
   };
 
   const fixedHeaderContent = () => (
-    <TableRow>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          variant="head"
-          align={column.dataKey === 'name' ? 'left' : 'center'}
-          style={{ width: column.width }}
-          sx={{
-            backgroundColor: '#f5f5f5',
-            border: '1px solid #ddd'
-          }}
-        >
-          {column.label}
-        </TableCell>
-      ))}
+    <TableRow style={{backgroundColor: '#f5f5f5'}}>
+        {columns.map((column) => (
+            <TableCell
+                key={column.dataKey}
+                variant="head"
+                align={column.dataKey === 'name' ? 'left' : 'center'}
+                style={{ width: column.width }}
+                sx={{
+                    border: '1px solid #ddd',
+                }}
+            >
+                {column.label}
+            </TableCell>
+        ))}
     </TableRow>
-  );
+);
 
   const rowContent = (index, student) => (
     <React.Fragment>
@@ -112,6 +112,10 @@ const StudentTable = ({ lastUpdate }) => {
       </Paper>
     </Box>
   );
+};
+
+StudentTable.propTypes = {
+  lastUpdate: PropTypes.number.isRequired,
 };
 
 export default StudentTable;

@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Statistics from './Statistics';
 import Status from './Status';
-import StudentTable from './Table'; 
+import StudentTable from './Table';
+import Grid from '@mui/material/Grid';
 
 const HomePage = () => {
-    const [checkedInCount, setCheckedInCount] = useState(0);
     const [lastUpdate, setLastUpdate] = useState(Date.now());
+
+    const updateTable = () => {
+        setLastUpdate(Date.now());
+    }
 
     return (
         <div>
-            <Statistics checkedInCount={checkedInCount} />
-            <Status setLastUpdate={setLastUpdate} />
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                    <Status setLastUpdate={updateTable} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Statistics lastUpdated={lastUpdate} />
+                </Grid>
+            </Grid>
             <StudentTable lastUpdate={lastUpdate} />
         </div>
     );
 };
-
 
 export default HomePage;
