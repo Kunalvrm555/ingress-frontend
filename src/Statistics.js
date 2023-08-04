@@ -31,7 +31,7 @@ const Statistics = ({ lastUpdated }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ maxWidth: "80%",  marginTop: 8, marginBottom: 2, marginLeft: 8 }}
+      <Box sx={{ maxWidth: "80%",  marginTop: 2, marginBottom: 2, marginLeft: 8 }}
       >
         <TableContainer component={Paper} style={{ margin: "10px" }}>
           <Table>

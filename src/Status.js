@@ -20,7 +20,7 @@ const theme = createTheme({
   },
 });
 
-const Status = ({ setLastUpdate }) => {
+const Status = ({ setLastUpdate, setStatusInfo }) => {
   const [student, setStudent] = useState({
     rollNo: "",
     name: "",
@@ -60,6 +60,12 @@ const Status = ({ setLastUpdate }) => {
             checkoutTime: data.checkoutTime,
           });
 
+          // Update status information
+          setStatusInfo({
+            isCheckedOut: !!data.checkoutTime,
+            isReady: !data.rollNo && !data.name && !data.checkInTime && !data.checkoutTime,
+          });
+
           // Update lastUpdate to trigger a refresh in the StudentTable
           setLastUpdate(Date.now());
         }
@@ -69,7 +75,7 @@ const Status = ({ setLastUpdate }) => {
         setRealTimeInput("");
       }
     },
-    [realTimeInput, loading, setLastUpdate]
+    [realTimeInput, loading, setLastUpdate, setStatusInfo]
   );
 
   useEffect(() => {
@@ -131,6 +137,7 @@ const Status = ({ setLastUpdate }) => {
 
 Status.propTypes = {
   setLastUpdate: PropTypes.func.isRequired,
+  setStatusInfo: PropTypes.func.isRequired,
 };
 
 export default Status;
