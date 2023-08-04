@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import UserContext from './UserContext';
-import LoginPage from './LoginPage';
-import AdminPage from './AdminPage';
-import HomePage from './HomePage';
+import UserContext from './components/Shared/UserContext';
+import LoginPage from './components/LoginPage/LoginPage';
+import AdminPage from './components/AdminPage/AdminPage';
+import HomePage from './components/HomePage/HomePage';
 
 const App = () => {
   const [user, setUser] = useState(null);

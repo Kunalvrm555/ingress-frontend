@@ -63,7 +63,11 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
           // Update status information
           setStatusInfo({
             isCheckedOut: !!data.checkoutTime,
-            isReady: !data.rollNo && !data.name && !data.checkInTime && !data.checkoutTime,
+            isReady:
+              !data.rollNo &&
+              !data.name &&
+              !data.checkInTime &&
+              !data.checkoutTime,
           });
 
           // Update lastUpdate to trigger a refresh in the StudentTable
@@ -89,7 +93,13 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
   return (
     <ThemeProvider theme={theme}>
       <Box
-        sx={{ maxWidth: "90%", margin: "auto", marginTop: 2, marginBottom: 2, marginLeft: 10 }}
+        sx={{
+          maxWidth: "90%",
+          margin: "auto",
+          marginTop: 2,
+          marginBottom: 2,
+          marginLeft: 10,
+        }}
       >
         <TableContainer component={Paper}>
           <Table
@@ -113,19 +123,35 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
             <TableBody>
               <TableRow>
                 <TableCell>Roll No</TableCell>
-                <TableCell>{student.rollNo}</TableCell>
+                <TableCell>
+                  <Typography variant="body1" fontWeight="bold">
+                    {student.rollNo}
+                  </Typography>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell>{student.name}</TableCell>
+                <TableCell>
+                  <Typography variant="body1" fontWeight="bold">
+                    {student.name}
+                  </Typography>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Check In Time</TableCell>
-                <TableCell>{student.checkInTime}</TableCell>
+                <TableCell>
+                  <Typography variant="body1" fontWeight="bold">
+                    {student.checkInTime}
+                  </Typography>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Check Out Time</TableCell>
-                <TableCell>{student.checkoutTime}</TableCell>
+                <TableCell>
+                  <Typography variant="body1" fontWeight="bold">
+                    {student.checkoutTime}
+                  </Typography>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>

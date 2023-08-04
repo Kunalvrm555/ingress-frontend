@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Statistics from "./Statistics";
 import Status from "./Status";
-import StudentTable from "./Table";
+import StudentTable from "../../Table";
 import Grid from "@mui/material/Grid";
 import StatusAlert from "./StatusAlert";
 
