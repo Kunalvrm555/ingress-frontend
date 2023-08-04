@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Alert } from "@mui/material";
 
 const StatusAlert = ({ isCheckedOut, isReady }) => {
-  const statusMessage = isCheckedOut
-    ? "Checked Out"
-    : isReady
-    ? "Ready"
-    : "Checked In";
+  const [status, setStatus] = useState(isReady ? "Ready" : "Checked In");
+  
+  useEffect(() => {
+    if (isCheckedOut) {
+      setStatus("Checked Out");
+    } else if (!isReady) {
+      setStatus("Checked In");
+    }
+    
+    const timer = setTimeout(() => {
+      setStatus("Ready");
+    }, 5000); // Change back to 'Ready' after 5 seconds
+
+    return () => clearTimeout(timer); // Clear the timer if the component is unmounted before the timeout
+  }, [isCheckedOut, isReady]);
 
   const backgroundColor = isCheckedOut
     ? "#ffff00"
-    : isReady
+    : status === "Ready"
     ? "#0000ff"
     : "#00cc00";
 
@@ -27,7 +37,7 @@ const StatusAlert = ({ isCheckedOut, isReady }) => {
     >
       <Alert
         variant="filled"
-        severity={isCheckedOut ? "warning" : isReady ? "info" : "success"}
+        severity={isCheckedOut ? "warning" : status === "Ready" ? "info" : "success"}
         sx={{
           backgroundColor: backgroundColor,
           color: textColor,
@@ -35,7 +45,7 @@ const StatusAlert = ({ isCheckedOut, isReady }) => {
           fontSize: "16px",
         }}
       >
-        {statusMessage}
+        {status}
       </Alert>
     </Box>
   );
