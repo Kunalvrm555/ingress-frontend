@@ -17,6 +17,7 @@ const theme = createTheme({
     fontFamily: "Arial",
   },
 });
+
 const Statistics = ({ lastUpdated }) => {
   const [statistics, setStatistics] = useState({
     checkedInCount: 0,
@@ -31,32 +32,50 @@ const Statistics = ({ lastUpdated }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ maxWidth: "80%",  marginTop: 2, marginBottom: 2, marginLeft: 8 }}
+      <Box
+        sx={{ maxWidth: "80%", marginTop: 2, marginBottom: 2, marginLeft: 8 }}
       >
-        <TableContainer component={Paper} style={{ margin: "10px" }}>
+        <TableContainer
+          component={Paper}
+          style={{ margin: "10px", border: "1px solid #ddd" }}
+        >
           <Table>
-            <TableHead style={{ backgroundColor: "#f5f5f5" }}>
+            <TableHead>
               <TableRow>
-                <TableCell>Statistics</TableCell>
+                <TableCell style={{ backgroundColor: "#f5f5f5" }}>
+                  Statistics
+                </TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell component="th" scope="row">
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Checked-In
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ backgroundColor: "#f5f5f5" }}
+                >
+                  <Typography variant="subtitle1">Checked-In</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    {statistics.checkedInCount}
                   </Typography>
                 </TableCell>
-                <TableCell>{statistics.checkedInCount}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell component="th" scope="row">
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Total Today
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ backgroundColor: "#f5f5f5" }}
+                >
+                  <Typography variant="subtitle1">Total Today</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    {statistics.checkedInTodayCount}
                   </Typography>
                 </TableCell>
-                <TableCell>{statistics.checkedInTodayCount}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

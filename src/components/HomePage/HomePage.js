@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Statistics from "./Statistics";
 import Status from "./Status";
-import StudentTable from "../../Table";
+import LogsTable from "./Logs";
 import Grid from "@mui/material/Grid";
 import StatusAlert from "./StatusAlert";
 
@@ -33,7 +33,7 @@ const HomePage = () => {
           <Statistics lastUpdated={lastUpdate} />
         </Grid>
       </Grid>
-      <StudentTable lastUpdate={lastUpdate} />
+      <LogsTable lastUpdate={lastUpdate} />
     </div>
   );
 };

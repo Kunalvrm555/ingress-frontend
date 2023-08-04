@@ -5,6 +5,7 @@ import UserContext from './components/Shared/UserContext';
 import LoginPage from './components/LoginPage/LoginPage';
 import AdminPage from './components/AdminPage/AdminPage';
 import HomePage from './components/HomePage/HomePage';
+import Header from './components/Shared/Header'; 
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -26,12 +27,11 @@ const App = () => {
 
   return (
     <Router>
+      <Header />
       <UserContext.Provider value={{ user, setUser }}>
         <Routes>
           <Route path="/" element={user ? user.role === 'admin' ? <AdminPage /> : <HomePage /> : <Navigate to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/admin" element={user?.role === 'admin' ? <AdminPage /> : <Navigate to="/login" />} /> */}
-          {/* <Route path="/user" element={user?.role === 'user' ? <HomePage /> : <Navigate to="/login" />} /> */}
         </Routes>
       </UserContext.Provider>
     </Router>

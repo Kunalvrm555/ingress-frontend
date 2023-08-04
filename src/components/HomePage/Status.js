@@ -12,7 +12,6 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import "./Status.css";
 
 const theme = createTheme({
   typography: {
@@ -52,7 +51,6 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
         if (response.ok) {
           const data = await response.json();
 
-          // Update the student data
           setStudent({
             rollNo: data.rollNo,
             name: data.name,
@@ -60,7 +58,6 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
             checkoutTime: data.checkoutTime,
           });
 
-          // Update status information
           setStatusInfo({
             isCheckedOut: !!data.checkoutTime,
             isReady:
@@ -70,7 +67,6 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               !data.checkoutTime,
           });
 
-          // Update lastUpdate to trigger a refresh in the StudentTable
           setLastUpdate(Date.now());
         }
 
@@ -101,15 +97,18 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
           marginLeft: 10,
         }}
       >
-        <TableContainer component={Paper}>
+        <TableContainer
+          component={Paper}
+          style={{ margin: "10px", border: "1px solid #ddd" }}
+        >
           <Table
             sx={{ minWidth: 650 }}
             aria-label="simple table"
             className={loading ? "blur-effect" : ""}
           >
-            <TableHead style={{ backgroundColor: "#f5f5f5" }}>
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={2}>
+                <TableCell style={{ backgroundColor: "#f5f5f5" }} colSpan={2}>
                   <Typography variant="h6">
                     Please scan your ID card :
                     <span style={{ color: "#000000", marginLeft: "10px" }}>
