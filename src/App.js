@@ -5,12 +5,12 @@ import UserContext from './components/Shared/UserContext';
 import LoginPage from './components/LoginPage/LoginPage';
 import AdminPage from './components/AdminPage/AdminPage';
 import HomePage from './components/HomePage/HomePage';
-import Header from './components/Shared/Header'; 
+import Header from './components/Shared/Header';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Check for token at start up
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -23,7 +23,10 @@ const App = () => {
         setUser(null);
       }
     }
+    setIsLoading(false);
   }, []);
+
+  if (isLoading) return null;
 
   return (
     <Router>

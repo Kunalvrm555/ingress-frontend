@@ -12,8 +12,11 @@ const HomePage = () => {
     isReady: true,
   });
 
+  const [lastCheckEvent, setLastCheckEvent] = useState(null);
+
   const updateTable = () => {
     setLastUpdate(Date.now());
+    setLastCheckEvent(Date.now()); 
   };
 
   return (
@@ -29,6 +32,7 @@ const HomePage = () => {
           <StatusAlert
             isCheckedOut={statusInfo.isCheckedOut}
             isReady={statusInfo.isReady}
+            lastCheckEvent={lastCheckEvent}
           />
           <Statistics lastUpdated={lastUpdate} />
         </Grid>

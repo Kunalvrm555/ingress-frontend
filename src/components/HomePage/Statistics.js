@@ -19,10 +19,7 @@ const theme = createTheme({
 });
 
 const Statistics = ({ lastUpdated }) => {
-  const [statistics, setStatistics] = useState({
-    checkedInCount: 0,
-    checkedInTodayCount: 0,
-  });
+  const [statistics, setStatistics] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/statistics") // replace with your API endpoint
@@ -59,7 +56,7 @@ const Statistics = ({ lastUpdated }) => {
                 </TableCell>
                 <TableCell>
                   <Typography variant="subtitle1" fontWeight="bold">
-                    {statistics.checkedInCount}
+                    {statistics ? statistics.checkedInCount : ""}
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -73,7 +70,7 @@ const Statistics = ({ lastUpdated }) => {
                 </TableCell>
                 <TableCell>
                   <Typography variant="subtitle1" fontWeight="bold">
-                    {statistics.checkedInTodayCount}
+                    {statistics ? statistics.checkedInTodayCount : ""}
                   </Typography>
                 </TableCell>
               </TableRow>
