@@ -16,7 +16,7 @@ import { TableVirtuoso } from "react-virtuoso";
 
 const columns = [
   {
-    width: "5%",
+    width: "2%",
     label: "S.No",
     dataKey: "sno",
   },
@@ -112,7 +112,7 @@ const LogsTable = ({ lastUpdate }) => {
 
   const rowContent = (index, student) => (
     <React.Fragment>
-      <TableCell sx={{ border: "1px solid #ddd" }}>{index + 1}</TableCell>
+    <TableCell align="center" sx={{ border: "1px solid #ddd" }}>{index + 1}</TableCell>
       {columns.slice(1).map((column) => (
         <TableCell
           key={column.dataKey}

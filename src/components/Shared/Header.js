@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
 import logo from './logo.png';
-import { Box } from '@mui/system';
+import devsocLogo from './devsoc.png';
 
 const Header = () => {
   return (
@@ -13,6 +13,12 @@ const Header = () => {
           <Typography variant="h5" sx={{ flexGrow: 1, fontFamily: 'Poppins', fontWeight: '500' }}>
             CENTRAL LIBRARY, IIT KHARAGPUR
           </Typography>
+          <Typography variant="subtitle1" color="inherit" sx={{ fontFamily : 'Poppins', mr: 1 }}>
+            Developed by :
+          </Typography>
+          <Box sx={{ backgroundColor: '#F5F5F5', borderRadius: '5px', border: '1px solid rgba(240, 240, 240, 0.5)', p: 0.5, height: "fit-content", display: "flex", alignItems: "center" }}>
+            <img src={devsocLogo} alt="developer-logo" height="40" />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
