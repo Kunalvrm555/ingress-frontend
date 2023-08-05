@@ -16,22 +16,20 @@ const HomePage = () => {
 
   const updateTable = () => {
     setLastUpdate(Date.now());
-    setLastCheckEvent(Date.now()); 
+    setLastCheckEvent(Date.now());
   };
 
   return (
     <div>
       <Grid container spacing={3} className="homepage-grid">
         <Grid item xs={12} md={6}>
-          <Status
-            setLastUpdate={updateTable}
-            setStatusInfo={setStatusInfo}
-          />
+          <Status setLastUpdate={updateTable} setStatusInfo={setStatusInfo} />
         </Grid>
         <Grid item xs={12} md={6}>
           <StatusAlert
             isCheckedOut={statusInfo.isCheckedOut}
             isReady={statusInfo.isReady}
+            notFound={statusInfo.notFound}
             lastCheckEvent={lastCheckEvent}
           />
           <Statistics lastUpdated={lastUpdate} />

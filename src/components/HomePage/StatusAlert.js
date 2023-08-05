@@ -2,25 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Alert } from "@mui/material";
 
-const StatusAlert = ({ isCheckedOut, isReady, lastCheckEvent }) => {
-  const [status, setStatus] = useState(isReady ? "Ready" : "Checked In");
+const StatusAlert = ({ isCheckedOut, isReady, notFound, lastCheckEvent }) => {
+  const [status, setStatus] = useState(notFound ? "Not Found" : isReady ? "Ready" : "Checked In");
 
   useEffect(() => {
     if (isCheckedOut) {
       setStatus("Checked Out");
+    } else if (notFound) {
+      setStatus("Not Found");
+      const timer = setTimeout(() => {
+        setStatus("Ready");
+      }, 5000);
+      return () => clearTimeout(timer);
     } else if (!isReady) {
       setStatus("Checked In");
     }
 
     const timer = setTimeout(() => {
       setStatus("Ready");
-    }, 5000); 
+    }, 5000);
 
     return () => clearTimeout(timer);
-  }, [isCheckedOut, isReady, lastCheckEvent]); 
+  }, [isCheckedOut, isReady, notFound, lastCheckEvent]);
 
   const backgroundColor = status === "Checked Out"
     ? "#ffff00"
+    : status === "Not Found"
+    ? "#ff0000"
     : status === "Ready"
     ? "#0000ff"
     : "#00cc00";
@@ -37,7 +45,7 @@ const StatusAlert = ({ isCheckedOut, isReady, lastCheckEvent }) => {
     >
       <Alert
         variant="filled"
-        severity={status === "Checked Out" ? "warning" : status === "Ready" ? "info" : "success"}
+        severity={status === "Checked Out" ? "warning" : status === "Not Found" ? "error" : status === "Ready" ? "info" : "success"}
         sx={{
           backgroundColor: backgroundColor,
           color: textColor,
@@ -50,5 +58,6 @@ const StatusAlert = ({ isCheckedOut, isReady, lastCheckEvent }) => {
     </Box>
   );
 };
+
 
 export default StatusAlert;

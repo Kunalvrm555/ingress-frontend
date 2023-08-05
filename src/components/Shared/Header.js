@@ -20,14 +20,14 @@ const Header = () => {
           </IconButton>
           <Typography
             variant="h5"
-            sx={{ flexGrow: 1, fontFamily: "Poppins", fontWeight: "500" }}
+            sx={{ flexGrow: 1, fontFamily: "Arial", fontWeight: "500" }}
           >
             CENTRAL LIBRARY, IIT KHARAGPUR
           </Typography>
           <Typography
             variant="subtitle1"
             color="inherit"
-            sx={{ fontFamily: "Poppins", mr: 1 }}
+            sx={{ fontFamily: "Arial", mr: 1 }}
           >
             Developed by :
           </Typography>

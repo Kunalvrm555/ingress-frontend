@@ -34,42 +34,45 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
       if (loading) {
         return;
       }
-
+  
       let input = realTimeInput + event.key;
       setRealTimeInput(input);
-
+  
       if (input.length === 9) {
         setLoading(true);
-
+  
         const response = await fetch(`http://localhost:8000/student/${input}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-
+  
         if (response.ok) {
           const data = await response.json();
-
+  
           setStudent({
             rollNo: data.rollNo,
             name: data.name,
             checkInTime: data.checkInTime,
             checkoutTime: data.checkoutTime,
           });
-
+  
           setStatusInfo({
             isCheckedOut: !!data.checkoutTime,
-            isReady:
-              !data.rollNo &&
-              !data.name &&
-              !data.checkInTime &&
-              !data.checkoutTime,
+            isReady: !data.rollNo && !data.name && !data.checkInTime && !data.checkoutTime,
+            notFound: false,
           });
-
+  
           setLastUpdate(Date.now());
+        } else if (response.status === 404) {
+          setStatusInfo({
+            isCheckedOut: false,
+            isReady: false,
+            notFound: true,
+          });
         }
-
+  
         setLoading(false);
         input = "";
         setRealTimeInput("");
@@ -77,6 +80,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
     },
     [realTimeInput, loading, setLastUpdate, setStatusInfo]
   );
+  
 
   useEffect(() => {
     window.addEventListener("keypress", handleKeyPress);
