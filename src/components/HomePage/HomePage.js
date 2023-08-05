@@ -18,7 +18,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} className="homepage-grid">
         <Grid item xs={12} md={6}>
           <Status
             setLastUpdate={updateTable}

@@ -8,18 +8,20 @@ import {
   TableRow,
   Paper,
   Box,
+  CircularProgress,
+  Typography
 } from "@mui/material";
 import { TableVirtuoso } from "react-virtuoso";
-// import studentsData from './students.json'; // Import students data from local JSON file
+
 
 const columns = [
   {
-    width: "1%",
+    width: "5%",
     label: "S.No",
     dataKey: "sno",
   },
   {
-    width: "5%",
+    width: "10%",
     label: "Roll No",
     dataKey: "rollno",
   },
@@ -29,34 +31,49 @@ const columns = [
     dataKey: "name",
   },
   {
-    width: "2%",
+    width: "5%",
     label: "Type",
     dataKey: "type",
   },
   {
-    width: "2%",
+    width: "5%",
     label: "Department",
     dataKey: "department",
   },
   {
-    width: "10%",
+    width: "20%",
     label: "Check In Time",
     dataKey: "checkInTime",
   },
 ];
 
+
 const LogsTable = ({ lastUpdate }) => {
   const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:8000/logs");
-      const data = await res.json();
-      setStudents(data);
+      setIsLoading(true);
+      try {
+        const res = await fetch("http://localhost:8000/logs");
+        if (!res.ok) {
+          throw new Error("An error occurred while fetching the logs.");
+        }
+        const data = await res.json();
+        setStudents(data);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
   }, [lastUpdate]);
+
 
   const VirtuosoTableComponents = {
     Scroller: React.forwardRef((props, ref) => (
@@ -108,27 +125,36 @@ const LogsTable = ({ lastUpdate }) => {
     </React.Fragment>
   );
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <Typography variant="body1" color="error">{error}</Typography>;
+  }
+
   return (
     <Box
-      sx={{ maxWidth: "98%", margin: "auto", marginTop: 2, marginBottom: 2 }}
+      sx={{ maxWidth: "95%", margin: "auto", marginTop: 2, marginBottom: 2 }}
     >
       <TableContainer
         component={Paper}
         style={{ margin: "10px", border: "1px solid #ddd" }}
       >
-        <Paper style={{ height: 400, width: "100%" }}>
-          <TableVirtuoso
-            data={students}
-            components={VirtuosoTableComponents}
-            fixedHeaderContent={fixedHeaderContent}
-            itemContent={rowContent}
-          />
+        <Paper style={{ height: "calc(100vh - 420px)", width: "100%", overflow: 'auto' }}> {/* adjust the subtraction value as needed */}
+          {students && students.length > 0 && (
+            <TableVirtuoso
+              data={students}
+              components={VirtuosoTableComponents}
+              fixedHeaderContent={fixedHeaderContent}
+              itemContent={rowContent}
+            />
+          )}
         </Paper>
       </TableContainer>
     </Box>
   );
 };
-
 LogsTable.propTypes = {
   lastUpdate: PropTypes.number.isRequired,
 };

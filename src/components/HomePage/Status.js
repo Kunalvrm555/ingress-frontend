@@ -123,7 +123,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               <TableRow>
                 <TableCell>Roll No</TableCell>
                 <TableCell>
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     {student.rollNo}
                   </Typography>
                 </TableCell>
@@ -131,7 +131,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     {student.name}
                   </Typography>
                 </TableCell>
@@ -139,7 +139,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               <TableRow>
                 <TableCell>Check In Time</TableCell>
                 <TableCell>
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     {student.checkInTime}
                   </Typography>
                 </TableCell>
@@ -147,7 +147,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               <TableRow>
                 <TableCell>Check Out Time</TableCell>
                 <TableCell>
-                  <Typography variant="body1" fontWeight="bold">
+                  <Typography variant="body2" fontWeight="bold">
                     {student.checkoutTime}
                   </Typography>
                 </TableCell>
