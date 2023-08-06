@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import UserContext from "../Shared/UserContext";
 import PropTypes from "prop-types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -20,6 +21,7 @@ const theme = createTheme({
 });
 
 const Status = ({ setLastUpdate, setStatusInfo }) => {
+  const { token } = useContext(UserContext);
   const [student, setStudent] = useState({
     rollNo: "",
     name: "",
@@ -34,36 +36,43 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
       if (loading) {
         return;
       }
-  
+
       let input = realTimeInput + event.key;
       setRealTimeInput(input);
-  
+
       if (input.length === 9) {
         setLoading(true);
-  
-        const response = await fetch(`http://localhost:8000/student/${input}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-  
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/student/${input}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
         if (response.ok) {
           const data = await response.json();
-  
+
           setStudent({
             rollNo: data.rollNo,
             name: data.name,
             checkInTime: data.checkInTime,
             checkoutTime: data.checkoutTime,
           });
-  
+
           setStatusInfo({
             isCheckedOut: !!data.checkoutTime,
-            isReady: !data.rollNo && !data.name && !data.checkInTime && !data.checkoutTime,
+            isReady:
+              !data.rollNo &&
+              !data.name &&
+              !data.checkInTime &&
+              !data.checkoutTime,
             notFound: false,
           });
-  
+
           setLastUpdate(Date.now());
         } else if (response.status === 404) {
           setStatusInfo({
@@ -72,15 +81,14 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
             notFound: true,
           });
         }
-  
+
         setLoading(false);
         input = "";
         setRealTimeInput("");
       }
     },
-    [realTimeInput, loading, setLastUpdate, setStatusInfo]
+    [realTimeInput, loading, setLastUpdate, setStatusInfo, token]
   );
-  
 
   useEffect(() => {
     window.addEventListener("keypress", handleKeyPress);
@@ -114,13 +122,14 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
               <TableRow>
                 <TableCell style={{ backgroundColor: "#f5f5f5" }} colSpan={2}>
                   <Typography variant="h6">
-                    Please scan your ID card :
-                    <span style={{ color: "#000000", marginLeft: "10px" }}>
-                      {realTimeInput}
-                    </span>
+                    Please scan your ID card:
+                    {realTimeInput && (
+                      <span style={{ color: "#000000", marginLeft: "10px" }}>
+                        {realTimeInput}
+                      </span>
+                    )}
                   </Typography>
                 </TableCell>
-                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

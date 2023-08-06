@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../Shared/UserContext";
 import {
   Table,
   TableBody,
@@ -19,13 +20,19 @@ const theme = createTheme({
 });
 
 const Statistics = ({ lastUpdated }) => {
+  const { token } = useContext(UserContext);
   const [statistics, setStatistics] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/statistics") // replace with your API endpoint
+    fetch(`${process.env.REACT_APP_API_URL}/statistics`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setStatistics(data));
-  }, [lastUpdated]);
+  }, [lastUpdated, token]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -39,19 +46,16 @@ const Statistics = ({ lastUpdated }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell style={{ backgroundColor: "#f5f5f5" }}>
-                  Statistics
+                <TableCell style={{ backgroundColor: "#f5f5f5" }} colSpan={2}>
+                  <Typography variant="h6" align="center">
+                    Statistics
+                  </Typography>
                 </TableCell>
-                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  style={{ backgroundColor: "#f5f5f5" }}
-                >
+                <TableCell component="th" scope="row">
                   <Typography variant="subtitle1">Checked-In</Typography>
                 </TableCell>
                 <TableCell>
@@ -61,11 +65,7 @@ const Statistics = ({ lastUpdated }) => {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  style={{ backgroundColor: "#f5f5f5" }}
-                >
+                <TableCell component="th" scope="row">
                   <Typography variant="subtitle1">Total Today</Typography>
                 </TableCell>
                 <TableCell>

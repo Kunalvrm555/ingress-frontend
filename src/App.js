@@ -9,18 +9,21 @@ import Header from './components/Shared/Header';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
       try {
-        const { username, userType, exp } = jwtDecode(token);
+        const { username, userType, exp } = jwtDecode(storedToken);
         if (Date.now() >= exp * 1000) throw new Error('Expired token');
         setUser({ role: userType, username });
+        setToken(storedToken);
       } catch (err) {
         localStorage.removeItem('token');
         setUser(null);
+        setToken(null);
       }
     }
     setIsLoading(false);
@@ -31,9 +34,12 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, token }}>
         <Routes>
-          <Route path="/" element={user ? user.role === 'admin' ? <AdminPage /> : <HomePage /> : <Navigate to="/login" />} />
+          <Route
+            path="/"
+            element={user ? (user.role === 'admin' ? <AdminPage /> : <HomePage />) : <Navigate to="/login" />}
+          />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </UserContext.Provider>

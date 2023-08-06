@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import UserContext from "../Shared/UserContext";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -23,6 +24,7 @@ const columns = [
 ];
 
 const LogsTable = ({ lastUpdate }) => {
+  const { token } = useContext(UserContext);
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +33,14 @@ const LogsTable = ({ lastUpdate }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch("http://localhost:8000/logs");
+        
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/logs`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         if (!res.ok) {
           throw new Error("An error occurred while fetching the logs.");
         }
@@ -46,7 +55,7 @@ const LogsTable = ({ lastUpdate }) => {
     };
 
     fetchData();
-  }, [lastUpdate]);
+  }, [lastUpdate, token]);
 
   const VirtuosoTableComponents = {
     Scroller: React.forwardRef((props, ref) => (
@@ -65,7 +74,7 @@ const LogsTable = ({ lastUpdate }) => {
   };
 
   const fixedHeaderContent = () => (
-    <TableRow style={{ backgroundColor: "#e0e0e0" }}>
+    <TableRow style={{ backgroundColor: "#f5f5f5" }}>
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
