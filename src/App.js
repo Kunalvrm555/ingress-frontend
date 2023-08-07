@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    if (storedToken) {
+    if (storedToken !== null) {
       try {
         const { username, userType, exp } = jwtDecode(storedToken);
         if (Date.now() >= exp * 1000) throw new Error('Expired token');
@@ -28,7 +28,6 @@ const App = () => {
     }
     setIsLoading(false);
   }, []);
-
   if (isLoading) return null;
 
   return (

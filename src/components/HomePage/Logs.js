@@ -107,7 +107,7 @@ const LogsTable = ({ lastUpdate }) => {
       );
     }
 
-    if (!isLoading && students.length === 0) {
+    if (!isLoading && (!students || students.length === 0)) {
       return (
         <TableRow>
           <TableCell colSpan={columns.length}>
