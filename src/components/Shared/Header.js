@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { useState } from "react";
 import logo from "./logo.png";
 import UserContext from "../Shared/UserContext";
