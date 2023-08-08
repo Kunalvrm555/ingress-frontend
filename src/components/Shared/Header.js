@@ -33,7 +33,7 @@ const Header = () => {
           </Typography>
           <Box
             sx={{
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#F3F3F3",
               borderRadius: "5px",
               border: "1px solid rgba(240, 240, 240, 0.5)",
               p: 0.5,

@@ -1,15 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from '../Shared/UserContext';
 import jwtDecode from "jwt-decode";
-import { Button, TextField, Container, Typography, Snackbar, Box } from '@mui/material';
-import { Alert } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin })=> {
   const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
   // Check for an existing token in localStorage when the component mounts
@@ -41,12 +40,8 @@ const LoginPage = () => {
       setUser({ role: userRole });
       navigate("/");
     } else if (response.status === 400) {
-      setOpenSnackbar(true);
+      setErrorMessage("Invalid username or password.");
     }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (
@@ -54,7 +49,7 @@ const LoginPage = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      style={{height: '60vh', backgroundColor: '#f2f2f2'}}
+      style={{backgroundColor: '#f2f2f2', height: '92vh'}}
     >
       <Box
         boxShadow={2}
@@ -62,6 +57,7 @@ const LoginPage = () => {
         p={2}
         borderRadius={2}
         maxWidth={400}
+        style={{ width: '80vw'}}
       >
         <Typography variant="h4" align="center">
           Login
@@ -90,16 +86,7 @@ const LoginPage = () => {
         >
           Login
         </Button>
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={5000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        >
-          <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
-            Invalid username or password.
-          </Alert>
-        </Snackbar>
+        {errorMessage && <Typography color="error" style={{ marginTop: 8 }}>{errorMessage}</Typography>}
       </Box>
     </Box>
   );
