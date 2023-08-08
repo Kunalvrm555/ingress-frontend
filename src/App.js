@@ -36,8 +36,8 @@ const App = () => {
   if (isLoading) return null;
   return (
     <Router>
-      <Header />
       <UserContext.Provider value={{ user, setUser, token, setToken }}>
+      <Header />
         <Routes>
           <Route
             path="/"

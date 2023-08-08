@@ -1,37 +1,40 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useState } from "react";
 import logo from "./logo.png";
+import UserContext from "../Shared/UserContext";
 import devsocLogo from "./devsoc.png";
 import logoutIcon from "./logout.png";
 
 const Header = () => {
+  const { token, setToken } = useContext(UserContext);
   const [imgLoaded, setImgLoaded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('token'));
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-    navigate('/login');
-  }
-
+    localStorage.removeItem("token");
+    setToken(null);
+    navigate("/login");
+  };
   return (
     <Box sx={{ position: "sticky", top: 0, zIndex: 999 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <a
+            href="https://library.iitkgp.ac.in/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <img src={logo} alt="logo" width="50" height="50" />
-          </IconButton>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <img src={logo} alt="logo" width="50" height="50" />
+            </IconButton>
+          </a>
           <Typography
             variant="h5"
             sx={{ flexGrow: 1, fontFamily: "Arial", fontWeight: "500" }}
@@ -56,7 +59,7 @@ const Header = () => {
               alignItems: "center",
               justifyContent: "center",
               minWidth: "110px",
-              minHeight: "40px", 
+              minHeight: "40px",
             }}
           >
             <img
@@ -67,7 +70,7 @@ const Header = () => {
               onLoad={() => setImgLoaded(true)}
             />
           </Box>
-          {isLoggedIn && (
+          {token && (
             <IconButton color="inherit" sx={{ ml: 2 }} onClick={handleLogout}>
               <img src={logoutIcon} alt="logout" width="30" height="30" />
             </IconButton>
