@@ -1,3 +1,10 @@
-import React from 'react';
-const UserContext = React.createContext(null);
+import { createContext } from 'react';
+
+const UserContext = createContext({
+  user: null,
+  setUser: () => {},
+  token: null,
+  setToken: () => {},
+});
+
 export default UserContext;

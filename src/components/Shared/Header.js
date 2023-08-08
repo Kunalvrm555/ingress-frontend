@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, IconButton, Box, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import logo from "./logo.png";

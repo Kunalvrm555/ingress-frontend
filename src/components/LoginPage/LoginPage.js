@@ -4,8 +4,8 @@ import jwtDecode from "jwt-decode";
 import { Button, TextField, Typography, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({ onLogin })=> {
-  const { setUser } = useContext(UserContext);
+const LoginPage = ()=> {
+  const { setUser, setToken } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
@@ -34,9 +34,10 @@ const LoginPage = ({ onLogin })=> {
     });
 
     if (response.ok) {
-      const { token } = await response.json();
-      localStorage.setItem('token', token);
-      const userRole = jwtDecode(token).userType;
+      const { token: apiToken } = await response.json();
+      localStorage.setItem('token', apiToken);
+      setToken(apiToken);  // Set the token in the context
+      const userRole = jwtDecode(apiToken).userType;
       setUser({ role: userRole });
       navigate("/");
     } else if (response.status === 400) {
