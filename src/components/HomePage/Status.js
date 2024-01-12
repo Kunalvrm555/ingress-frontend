@@ -33,13 +33,20 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
 
   const handleKeyPress = useCallback(
     async (event) => {
+      // Check if the pressed key is Enter
+      if (event.key === 'Enter') {
+        // Prevent the default action
+        event.preventDefault();
+        return; // Stop further processing
+      }
+  
       if (loading) {
         return;
       }
-
+  
       let input = realTimeInput + event.key;
       setRealTimeInput(input);
-
+  
       if (input.length === 9) {
         setLoading(true);
         const response = await fetch(
@@ -88,7 +95,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
       }
     },
     [realTimeInput, loading, setLastUpdate, setStatusInfo, token]
-  );
+  );  
 
   useEffect(() => {
     window.addEventListener("keypress", handleKeyPress);
