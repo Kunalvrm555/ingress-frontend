@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -12,6 +12,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import Register from './Register';
 
 const theme = createTheme({
   typography: {
@@ -28,13 +29,18 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
   });
   const [loading, setLoading] = useState(false);
   const [realTimeInput, setRealTimeInput] = useState("");
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
 
   const handleKeyPress = useCallback(
     async (event) => {
+      if (showRegisterModal || event.target !== document.body) return;
+      // Convert input to uppercase
+      let char = event.key.toUpperCase();
+
       // Check if the pressed key is Enter
-      if (event.key === 'Enter') {
-        // Prevent the default action
-        event.preventDefault();
+      if (char === 'Enter') {
+        event.preventDefault(); // Prevent the default action
         return; // Stop further processing
       }
 
@@ -42,7 +48,7 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
         return;
       }
 
-      let input = realTimeInput + event.key;
+      let input = realTimeInput + char;
       setRealTimeInput(input);
 
       if (input.length === 9) {
@@ -59,36 +65,13 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
 
         if (response.ok) {
           const data = await response.json();
+          handleFetchSuccess(data);
 
-          setStudent({
-            rollNo: data.rollNo,
-            name: data.name,
-            checkInTime: data.checkInTime,
-            checkoutTime: data.checkoutTime,
-          });
-
-          setStatusInfo({
-            isCheckedOut: !!data.checkoutTime,
-            isReady:
-              !data.rollNo &&
-              !data.name &&
-              !data.checkInTime &&
-              !data.checkoutTime,
-            notFound: false,
-          });
-
-          setLastUpdate(Date.now());
         } else if (response.status === 404) {
-          setStatusInfo({
-            isCheckedOut: false,
-            isReady: false,
-            notFound: true,
-          });
+          handleNotFound();
         }
 
         setLoading(false);
-        input = "";
-        setRealTimeInput("");
       }
     },
     [realTimeInput, loading, setLastUpdate, setStatusInfo]
@@ -101,6 +84,35 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
       window.removeEventListener("keypress", handleKeyPress);
     };
   }, [handleKeyPress]);
+
+  const handleNotFound = () => {
+    setStatusInfo({
+      isCheckedOut: false,
+      isReady: false,
+      notFound: true,
+    });
+    setShowRegisterModal(true);
+  };
+  const handleFetchSuccess = (data) => {
+    setStudent({
+      rollNo: data.rollNo,
+      name: data.name,
+      checkInTime: data.checkInTime,
+      checkoutTime: data.checkoutTime,
+    });
+    setStatusInfo({
+      isCheckedOut: !!data.checkoutTime,
+      isReady: !data.rollNo && !data.name && !data.checkInTime && !data.checkoutTime,
+      notFound: false,
+    });
+    setLastUpdate(Date.now());
+    setRealTimeInput('');
+  };
+  const handleCloseModal = () => {
+    setShowRegisterModal(false);
+    // Reload the page to reset the status
+    window.location.reload();
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -173,6 +185,13 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
           </Table>
         </TableContainer>
       </Box>
+      {showRegisterModal && (
+        <Register
+          open={showRegisterModal}
+          handleClose={handleCloseModal}
+          prepopulatedRollNo={realTimeInput}
+        />
+      )}
     </ThemeProvider>
   );
 };
