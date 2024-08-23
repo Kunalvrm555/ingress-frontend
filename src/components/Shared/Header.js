@@ -1,22 +1,15 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useContext} from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import logo from "./logo.png";
-import UserContext from "../Shared/UserContext";
 import devsocLogo from "./devsoc.png";
-import logoutIcon from "./logout.png";
 
 const Header = () => {
-  const { token, setToken } = useContext(UserContext);
   const [imgLoaded, setImgLoaded] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    navigate("/login");
-  };
+
   return (
     <Box sx={{ position: "sticky", top: 0, zIndex: 999 }}>
       <AppBar position="static">
@@ -70,11 +63,6 @@ const Header = () => {
               onLoad={() => setImgLoaded(true)}
             />
           </Box>
-          {token && (
-            <IconButton color="inherit" sx={{ ml: 2 }} onClick={handleLogout}>
-              <img src={logoutIcon} alt="logout" width="30" height="30" />
-            </IconButton>
-          )}
         </Toolbar>
       </AppBar>
     </Box>

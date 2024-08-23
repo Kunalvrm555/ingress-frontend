@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import UserContext from "../Shared/UserContext";
 import PropTypes from "prop-types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -21,7 +20,6 @@ const theme = createTheme({
 });
 
 const Status = ({ setLastUpdate, setStatusInfo }) => {
-  const { token } = useContext(UserContext);
   const [student, setStudent] = useState({
     rollNo: "",
     name: "",
@@ -39,14 +37,14 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
         event.preventDefault();
         return; // Stop further processing
       }
-  
+
       if (loading) {
         return;
       }
-  
+
       let input = realTimeInput + event.key;
       setRealTimeInput(input);
-  
+
       if (input.length === 9) {
         setLoading(true);
         const response = await fetch(
@@ -55,7 +53,6 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
             },
           }
         );
@@ -94,8 +91,8 @@ const Status = ({ setLastUpdate, setStatusInfo }) => {
         setRealTimeInput("");
       }
     },
-    [realTimeInput, loading, setLastUpdate, setStatusInfo, token]
-  );  
+    [realTimeInput, loading, setLastUpdate, setStatusInfo]
+  );
 
   useEffect(() => {
     window.addEventListener("keypress", handleKeyPress);

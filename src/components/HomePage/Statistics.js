@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import UserContext from "../Shared/UserContext";
 import {
   Table,
   TableBody,
@@ -20,7 +19,6 @@ const theme = createTheme({
 });
 
 const Statistics = ({ lastUpdated }) => {
-  const { token } = useContext(UserContext);
   const [statistics, setStatistics] = useState(null);
 
   useEffect(() => {
@@ -28,12 +26,11 @@ const Statistics = ({ lastUpdated }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
       .then((data) => setStatistics(data));
-  }, [lastUpdated, token]);
+  }, [lastUpdated]);
 
   return (
     <ThemeProvider theme={theme}>
